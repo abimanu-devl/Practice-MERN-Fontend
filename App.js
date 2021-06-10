@@ -5,6 +5,7 @@ import createCategory from './components/categoryComponents/createCategory';
 import viewCategories from './components/categoryComponents/viewCategories';
 import createVehicle from './components/vehicleComponents/createVehicle';
 import viewVehicles from './components/vehicleComponents/viewVehicles';
+import vehiclesInCategory from './components/categoryComponents/vehiclesInCategory';
 
 const App = () => {
     return (
@@ -17,6 +18,7 @@ const App = () => {
                     <Route path ="/viewCategory" component={viewCategories}/>
                     <Route path="/createCategory" component={createCategory} />
                     <Route path="/createVehicle" component={createVehicle} />
+                    <Route path="/getVehicles/:id" component={vehiclesInCategory} />
                 </Switch>
             </Router>
         </div>

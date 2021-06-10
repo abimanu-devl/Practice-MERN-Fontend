@@ -32,7 +32,12 @@ class viewCategories extends Component {
     }
 
     vehiclesInEachCategory(id){
-
+        axios.get(`http://localhost:3001/api/category/getVehicles/${id}`)
+        .then(response =>{
+            this.props.history.push(`/getVehicles/${id}`)
+        }).catch(error =>{
+            console.error(error);
+        })
     }
 
     render() {
@@ -46,7 +51,7 @@ class viewCategories extends Component {
                                 <p>Trip type: {item.type}</p>
                                 <p>Kilometers: {item.kilometers}KM</p>
                                 <p>Price per Kilometer: Rs.{item.chargePerKm}</p>
-                                <button className="btn btn-primary">View</button>
+                                <button className="btn btn-primary" onClick={e => this.vehiclesInEachCategory(item._id)}>View</button>
                                 <button className="btn btn-success" onClick={e => this.calculateAmount(item._id)} style={{ marginLeft: "10px" }}>Calucate Amount</button>
                             </div>
                         </div>

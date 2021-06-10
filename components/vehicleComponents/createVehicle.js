@@ -1,4 +1,4 @@
-import React, { Component, version } from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import Select from 'react-select';
 

@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Select from 'react-select';
 
 const initialState = {
     type: "",
     kilometers: 0,
-    chargePerKm: 0
+    chargePerKm: 0,
+    vehicles: [],
+    options: [],
+    selectedVehicles: []
 }
 class createCategory extends Component {
     constructor(props) {
@@ -12,10 +16,32 @@ class createCategory extends Component {
         this.state = initialState;
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onVehicleSelect=this.onVehicleSelect.bind(this);
+    }
+
+    componentDidMount(){
+        axios.get('http://localhost:3001/api/vehicle')
+            .then(response => {
+                this.setState({ vehicles: response.data.data }, () => {
+                    let data = [];
+                    this.state.vehicles.map((item, index) => {
+                        let vehicles = {
+                            value: item._id,
+                            label: item.name
+                        }
+                        data.push(vehicles)
+                    });
+                    this.setState({ options: data });
+                })
+            })
     }
 
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value })
+    }
+
+    onVehicleSelect(e) {
+        this.setState({ selectedVehicles: e ? e.map(item => item.value) : [] });
     }
 
     onSubmit(e) {
@@ -23,7 +49,8 @@ class createCategory extends Component {
         let category = {
             type: this.state.type,
             kilometers: this.state.kilometers,
-            chargePerKm: this.state.chargePerKm
+            chargePerKm: this.state.chargePerKm,
+            vehicles: this.state.selectedVehicles
         }
         console.log(category);
         axios.post('http://localhost:3001/api/category/add', category)
@@ -81,6 +108,14 @@ class createCategory extends Component {
                                     onChange={this.onChange}
                                 />
                             </div>
+                            <label htmlFor="name" className="form-label">Vehicles</label>
+                            <Select
+                                options={this.state.options}
+                                onChange={this.onVehicleSelect}
+                                className="basic-multi-select"
+                                isMulti
+                            />
+                            <br />
                             <button type="submit" className="btn btn-primary">Submit</button>
                         </form>
                     </div>

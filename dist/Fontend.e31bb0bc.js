@@ -35569,290 +35569,7 @@ module.exports.default = axios;
 
 },{"./utils":"node_modules/axios/lib/utils.js","./helpers/bind":"node_modules/axios/lib/helpers/bind.js","./core/Axios":"node_modules/axios/lib/core/Axios.js","./core/mergeConfig":"node_modules/axios/lib/core/mergeConfig.js","./defaults":"node_modules/axios/lib/defaults.js","./cancel/Cancel":"node_modules/axios/lib/cancel/Cancel.js","./cancel/CancelToken":"node_modules/axios/lib/cancel/CancelToken.js","./cancel/isCancel":"node_modules/axios/lib/cancel/isCancel.js","./helpers/spread":"node_modules/axios/lib/helpers/spread.js","./helpers/isAxiosError":"node_modules/axios/lib/helpers/isAxiosError.js"}],"node_modules/axios/index.js":[function(require,module,exports) {
 module.exports = require('./lib/axios');
-},{"./lib/axios":"node_modules/axios/lib/axios.js"}],"components/categoryComponents/createCategory.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _axios = _interopRequireDefault(require("axios"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-var initialState = {
-  type: "",
-  kilometers: 0,
-  chargePerKm: 0
-};
-
-var createCategory = /*#__PURE__*/function (_Component) {
-  _inherits(createCategory, _Component);
-
-  var _super = _createSuper(createCategory);
-
-  function createCategory(props) {
-    var _this;
-
-    _classCallCheck(this, createCategory);
-
-    _this = _super.call(this, props);
-    _this.state = initialState;
-    _this.onChange = _this.onChange.bind(_assertThisInitialized(_this));
-    _this.onSubmit = _this.onSubmit.bind(_assertThisInitialized(_this));
-    return _this;
-  }
-
-  _createClass(createCategory, [{
-    key: "onChange",
-    value: function onChange(e) {
-      this.setState(_defineProperty({}, e.target.name, e.target.value));
-    }
-  }, {
-    key: "onSubmit",
-    value: function onSubmit(e) {
-      e.preventDefault();
-      var category = {
-        type: this.state.type,
-        kilometers: this.state.kilometers,
-        chargePerKm: this.state.chargePerKm
-      };
-      console.log(category);
-
-      _axios.default.post('http://localhost:3001/api/category/add', category).then(function (response) {
-        alert('Category Inserted Successfully');
-        console.log(response.data);
-      }).catch(function (error) {
-        console.log(error.message);
-        alert(error.message);
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/_react.default.createElement("div", {
-        className: "container"
-      }, /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("div", {
-        className: "card",
-        style: {
-          width: "50%",
-          marginLeft: "25%"
-        }
-      }, /*#__PURE__*/_react.default.createElement("div", {
-        className: "card-header"
-      }, /*#__PURE__*/_react.default.createElement("h4", null, "Add Category")), /*#__PURE__*/_react.default.createElement("div", {
-        className: "card-body"
-      }, /*#__PURE__*/_react.default.createElement("form", {
-        onSubmit: this.onSubmit
-      }, /*#__PURE__*/_react.default.createElement("div", {
-        className: "mb-3"
-      }, /*#__PURE__*/_react.default.createElement("label", {
-        htmlFor: "type",
-        className: "form-label"
-      }, "Category Type"), /*#__PURE__*/_react.default.createElement("input", {
-        type: "text",
-        className: "form-control",
-        id: "type",
-        name: "type",
-        value: this.state.type,
-        onChange: this.onChange
-      })), /*#__PURE__*/_react.default.createElement("div", {
-        className: "mb-3"
-      }, /*#__PURE__*/_react.default.createElement("label", {
-        htmlFor: "kilometers",
-        className: "form-label"
-      }, "Kilometers"), /*#__PURE__*/_react.default.createElement("input", {
-        type: "number",
-        className: "form-control",
-        id: "kilometers",
-        rows: "3",
-        name: "kilometers",
-        value: this.state.kilometers,
-        onChange: this.onChange
-      })), /*#__PURE__*/_react.default.createElement("div", {
-        className: "mb-3"
-      }, /*#__PURE__*/_react.default.createElement("label", {
-        htmlFor: "chargePerKm",
-        className: "form-label"
-      }, "Price Per Kilometer"), /*#__PURE__*/_react.default.createElement("input", {
-        type: "number",
-        className: "form-control",
-        id: "chargePerKm",
-        name: "chargePerKm",
-        value: this.state.chargePerKm,
-        onChange: this.onChange
-      })), /*#__PURE__*/_react.default.createElement("button", {
-        type: "submit",
-        className: "btn btn-primary"
-      }, "Submit")))));
-    }
-  }]);
-
-  return createCategory;
-}(_react.Component);
-
-var _default = createCategory;
-exports.default = _default;
-},{"react":"node_modules/react/index.js","axios":"node_modules/axios/index.js"}],"components/categoryComponents/viewCategories.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _axios = _interopRequireDefault(require("axios"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-var viewCategories = /*#__PURE__*/function (_Component) {
-  _inherits(viewCategories, _Component);
-
-  var _super = _createSuper(viewCategories);
-
-  function viewCategories(props) {
-    var _this;
-
-    _classCallCheck(this, viewCategories);
-
-    _this = _super.call(this, props);
-    _this.state = {
-      categories: [],
-      totalCharge: ''
-    };
-    _this.calculateAmount = _this.calculateAmount.bind(_assertThisInitialized(_this));
-    _this.vehiclesInEachCategory = _this.vehiclesInEachCategory.bind(_assertThisInitialized(_this));
-    return _this;
-  }
-
-  _createClass(viewCategories, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      _axios.default.get('http://localhost:3001/api/category').then(function (response) {
-        _this2.setState({
-          categories: response.data.data
-        });
-      });
-    }
-  }, {
-    key: "calculateAmount",
-    value: function calculateAmount(id) {
-      var _this3 = this;
-
-      _axios.default.get("http://localhost:3001/api/category/totalAmount/".concat(id)).then(function (response) {
-        _this3.setState({
-          totalCharge: response.data
-        }); //this setState method can call inside the render function using this.state.totalCharge
-
-
-        alert('Total Charge for Trip : Rs.' + response.data.totalCharge); //this.props.history.push(`/totalAmount/${id}`) use display passad id into another page
-      }).catch(function (error) {
-        console.error(error);
-      });
-    }
-  }, {
-    key: "vehiclesInEachCategory",
-    value: function vehiclesInEachCategory(id) {}
-  }, {
-    key: "render",
-    value: function render() {
-      var _this4 = this;
-
-      return /*#__PURE__*/_react.default.createElement("div", {
-        className: "container"
-      }, /*#__PURE__*/_react.default.createElement("h3", null, "Categories"), this.state.categories.length > 0 && this.state.categories.map(function (item, index) {
-        return /*#__PURE__*/_react.default.createElement("div", {
-          key: index,
-          className: "card mb-3",
-          style: {
-            width: "50%"
-          }
-        }, /*#__PURE__*/_react.default.createElement("div", {
-          className: "card body"
-        }, /*#__PURE__*/_react.default.createElement("div", {
-          className: "p-2"
-        }, /*#__PURE__*/_react.default.createElement("p", null, "Trip type: ", item.type), /*#__PURE__*/_react.default.createElement("p", null, "Kilometers: ", item.kilometers, "KM"), /*#__PURE__*/_react.default.createElement("p", null, "Price per Kilometer: Rs.", item.chargePerKm), /*#__PURE__*/_react.default.createElement("button", {
-          className: "btn btn-primary"
-        }, "View"), /*#__PURE__*/_react.default.createElement("button", {
-          className: "btn btn-success",
-          onClick: function onClick(e) {
-            return _this4.calculateAmount(item._id);
-          },
-          style: {
-            marginLeft: "10px"
-          }
-        }, "Calucate Amount"))));
-      }));
-    }
-  }]);
-
-  return viewCategories;
-}(_react.Component);
-
-var _default = viewCategories;
-exports.default = _default;
-},{"react":"node_modules/react/index.js","axios":"node_modules/axios/index.js"}],"node_modules/@emotion/sheet/dist/emotion-sheet.browser.esm.js":[function(require,module,exports) {
+},{"./lib/axios":"node_modules/axios/lib/axios.js"}],"node_modules/@emotion/sheet/dist/emotion-sheet.browser.esm.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -43574,7 +43291,350 @@ exports.NonceProvider = NonceProvider;
 var index = (0, _stateManager845a3300Esm.m)(_SelectDbb12e54Esm.S);
 var _default = index;
 exports.default = _default;
-},{"./Select-dbb12e54.esm.js":"node_modules/react-select/dist/Select-dbb12e54.esm.js","./stateManager-845a3300.esm.js":"node_modules/react-select/dist/stateManager-845a3300.esm.js","@babel/runtime/helpers/esm/classCallCheck":"node_modules/@babel/runtime/helpers/esm/classCallCheck.js","@babel/runtime/helpers/esm/createClass":"node_modules/@babel/runtime/helpers/esm/createClass.js","@babel/runtime/helpers/esm/inherits":"node_modules/@babel/runtime/helpers/esm/inherits.js","./index-4bd03571.esm.js":"node_modules/react-select/dist/index-4bd03571.esm.js","react":"node_modules/react/index.js","@emotion/react":"node_modules/@emotion/react/dist/emotion-react.browser.esm.js","@emotion/cache":"node_modules/@emotion/cache/dist/emotion-cache.browser.esm.js","memoize-one":"node_modules/memoize-one/dist/memoize-one.esm.js","@babel/runtime/helpers/extends":"node_modules/@babel/runtime/helpers/extends.js","@babel/runtime/helpers/toConsumableArray":"node_modules/@babel/runtime/helpers/toConsumableArray.js","@babel/runtime/helpers/objectWithoutProperties":"node_modules/@babel/runtime/helpers/objectWithoutProperties.js","@babel/runtime/helpers/taggedTemplateLiteral":"node_modules/@babel/runtime/helpers/taggedTemplateLiteral.js","@babel/runtime/helpers/typeof":"node_modules/@babel/runtime/helpers/typeof.js","react-input-autosize":"node_modules/react-input-autosize/lib/AutosizeInput.js","@babel/runtime/helpers/defineProperty":"node_modules/@babel/runtime/helpers/defineProperty.js","react-dom":"node_modules/react-dom/index.js"}],"components/vehicleComponents/createVehicle.js":[function(require,module,exports) {
+},{"./Select-dbb12e54.esm.js":"node_modules/react-select/dist/Select-dbb12e54.esm.js","./stateManager-845a3300.esm.js":"node_modules/react-select/dist/stateManager-845a3300.esm.js","@babel/runtime/helpers/esm/classCallCheck":"node_modules/@babel/runtime/helpers/esm/classCallCheck.js","@babel/runtime/helpers/esm/createClass":"node_modules/@babel/runtime/helpers/esm/createClass.js","@babel/runtime/helpers/esm/inherits":"node_modules/@babel/runtime/helpers/esm/inherits.js","./index-4bd03571.esm.js":"node_modules/react-select/dist/index-4bd03571.esm.js","react":"node_modules/react/index.js","@emotion/react":"node_modules/@emotion/react/dist/emotion-react.browser.esm.js","@emotion/cache":"node_modules/@emotion/cache/dist/emotion-cache.browser.esm.js","memoize-one":"node_modules/memoize-one/dist/memoize-one.esm.js","@babel/runtime/helpers/extends":"node_modules/@babel/runtime/helpers/extends.js","@babel/runtime/helpers/toConsumableArray":"node_modules/@babel/runtime/helpers/toConsumableArray.js","@babel/runtime/helpers/objectWithoutProperties":"node_modules/@babel/runtime/helpers/objectWithoutProperties.js","@babel/runtime/helpers/taggedTemplateLiteral":"node_modules/@babel/runtime/helpers/taggedTemplateLiteral.js","@babel/runtime/helpers/typeof":"node_modules/@babel/runtime/helpers/typeof.js","react-input-autosize":"node_modules/react-input-autosize/lib/AutosizeInput.js","@babel/runtime/helpers/defineProperty":"node_modules/@babel/runtime/helpers/defineProperty.js","react-dom":"node_modules/react-dom/index.js"}],"components/categoryComponents/createCategory.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _axios = _interopRequireDefault(require("axios"));
+
+var _reactSelect = _interopRequireDefault(require("react-select"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+var initialState = {
+  type: "",
+  kilometers: 0,
+  chargePerKm: 0,
+  vehicles: [],
+  options: [],
+  selectedVehicles: []
+};
+
+var createCategory = /*#__PURE__*/function (_Component) {
+  _inherits(createCategory, _Component);
+
+  var _super = _createSuper(createCategory);
+
+  function createCategory(props) {
+    var _this;
+
+    _classCallCheck(this, createCategory);
+
+    _this = _super.call(this, props);
+    _this.state = initialState;
+    _this.onChange = _this.onChange.bind(_assertThisInitialized(_this));
+    _this.onSubmit = _this.onSubmit.bind(_assertThisInitialized(_this));
+    _this.onVehicleSelect = _this.onVehicleSelect.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(createCategory, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      _axios.default.get('http://localhost:3001/api/vehicle').then(function (response) {
+        _this2.setState({
+          vehicles: response.data.data
+        }, function () {
+          var data = [];
+
+          _this2.state.vehicles.map(function (item, index) {
+            var vehicles = {
+              value: item._id,
+              label: item.name
+            };
+            data.push(vehicles);
+          });
+
+          _this2.setState({
+            options: data
+          });
+        });
+      });
+    }
+  }, {
+    key: "onChange",
+    value: function onChange(e) {
+      this.setState(_defineProperty({}, e.target.name, e.target.value));
+    }
+  }, {
+    key: "onVehicleSelect",
+    value: function onVehicleSelect(e) {
+      this.setState({
+        selectedVehicles: e ? e.map(function (item) {
+          return item.value;
+        }) : []
+      });
+    }
+  }, {
+    key: "onSubmit",
+    value: function onSubmit(e) {
+      e.preventDefault();
+      var category = {
+        type: this.state.type,
+        kilometers: this.state.kilometers,
+        chargePerKm: this.state.chargePerKm,
+        vehicles: this.state.selectedVehicles
+      };
+      console.log(category);
+
+      _axios.default.post('http://localhost:3001/api/category/add', category).then(function (response) {
+        alert('Category Inserted Successfully');
+        console.log(response.data);
+      }).catch(function (error) {
+        console.log(error.message);
+        alert(error.message);
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/_react.default.createElement("div", {
+        className: "container"
+      }, /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("div", {
+        className: "card",
+        style: {
+          width: "50%",
+          marginLeft: "25%"
+        }
+      }, /*#__PURE__*/_react.default.createElement("div", {
+        className: "card-header"
+      }, /*#__PURE__*/_react.default.createElement("h4", null, "Add Category")), /*#__PURE__*/_react.default.createElement("div", {
+        className: "card-body"
+      }, /*#__PURE__*/_react.default.createElement("form", {
+        onSubmit: this.onSubmit
+      }, /*#__PURE__*/_react.default.createElement("div", {
+        className: "mb-3"
+      }, /*#__PURE__*/_react.default.createElement("label", {
+        htmlFor: "type",
+        className: "form-label"
+      }, "Category Type"), /*#__PURE__*/_react.default.createElement("input", {
+        type: "text",
+        className: "form-control",
+        id: "type",
+        name: "type",
+        value: this.state.type,
+        onChange: this.onChange
+      })), /*#__PURE__*/_react.default.createElement("div", {
+        className: "mb-3"
+      }, /*#__PURE__*/_react.default.createElement("label", {
+        htmlFor: "kilometers",
+        className: "form-label"
+      }, "Kilometers"), /*#__PURE__*/_react.default.createElement("input", {
+        type: "number",
+        className: "form-control",
+        id: "kilometers",
+        rows: "3",
+        name: "kilometers",
+        value: this.state.kilometers,
+        onChange: this.onChange
+      })), /*#__PURE__*/_react.default.createElement("div", {
+        className: "mb-3"
+      }, /*#__PURE__*/_react.default.createElement("label", {
+        htmlFor: "chargePerKm",
+        className: "form-label"
+      }, "Price Per Kilometer"), /*#__PURE__*/_react.default.createElement("input", {
+        type: "number",
+        className: "form-control",
+        id: "chargePerKm",
+        name: "chargePerKm",
+        value: this.state.chargePerKm,
+        onChange: this.onChange
+      })), /*#__PURE__*/_react.default.createElement("label", {
+        htmlFor: "name",
+        className: "form-label"
+      }, "Vehicles"), /*#__PURE__*/_react.default.createElement(_reactSelect.default, {
+        options: this.state.options,
+        onChange: this.onVehicleSelect,
+        className: "basic-multi-select",
+        isMulti: true
+      }), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("button", {
+        type: "submit",
+        className: "btn btn-primary"
+      }, "Submit")))));
+    }
+  }]);
+
+  return createCategory;
+}(_react.Component);
+
+var _default = createCategory;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","axios":"node_modules/axios/index.js","react-select":"node_modules/react-select/dist/react-select.esm.js"}],"components/categoryComponents/viewCategories.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _axios = _interopRequireDefault(require("axios"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+var viewCategories = /*#__PURE__*/function (_Component) {
+  _inherits(viewCategories, _Component);
+
+  var _super = _createSuper(viewCategories);
+
+  function viewCategories(props) {
+    var _this;
+
+    _classCallCheck(this, viewCategories);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      categories: [],
+      totalCharge: ''
+    };
+    _this.calculateAmount = _this.calculateAmount.bind(_assertThisInitialized(_this));
+    _this.vehiclesInEachCategory = _this.vehiclesInEachCategory.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(viewCategories, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      _axios.default.get('http://localhost:3001/api/category').then(function (response) {
+        _this2.setState({
+          categories: response.data.data
+        });
+      });
+    }
+  }, {
+    key: "calculateAmount",
+    value: function calculateAmount(id) {
+      var _this3 = this;
+
+      _axios.default.get("http://localhost:3001/api/category/totalAmount/".concat(id)).then(function (response) {
+        _this3.setState({
+          totalCharge: response.data
+        }); //this setState method can call inside the render function using this.state.totalCharge
+
+
+        alert('Total Charge for Trip : Rs.' + response.data.totalCharge); //this.props.history.push(`/totalAmount/${id}`) use display passad id into another page
+      }).catch(function (error) {
+        console.error(error);
+      });
+    }
+  }, {
+    key: "vehiclesInEachCategory",
+    value: function vehiclesInEachCategory(id) {
+      var _this4 = this;
+
+      _axios.default.get("http://localhost:3001/api/category/getVehicles/".concat(id)).then(function (response) {
+        _this4.props.history.push("/getVehicles/".concat(id));
+      }).catch(function (error) {
+        console.error(error);
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this5 = this;
+
+      return /*#__PURE__*/_react.default.createElement("div", {
+        className: "container"
+      }, /*#__PURE__*/_react.default.createElement("h3", null, "Categories"), this.state.categories.length > 0 && this.state.categories.map(function (item, index) {
+        return /*#__PURE__*/_react.default.createElement("div", {
+          key: index,
+          className: "card mb-3",
+          style: {
+            width: "50%"
+          }
+        }, /*#__PURE__*/_react.default.createElement("div", {
+          className: "card body"
+        }, /*#__PURE__*/_react.default.createElement("div", {
+          className: "p-2"
+        }, /*#__PURE__*/_react.default.createElement("p", null, "Trip type: ", item.type), /*#__PURE__*/_react.default.createElement("p", null, "Kilometers: ", item.kilometers, "KM"), /*#__PURE__*/_react.default.createElement("p", null, "Price per Kilometer: Rs.", item.chargePerKm), /*#__PURE__*/_react.default.createElement("button", {
+          className: "btn btn-primary",
+          onClick: function onClick(e) {
+            return _this5.vehiclesInEachCategory(item._id);
+          }
+        }, "View"), /*#__PURE__*/_react.default.createElement("button", {
+          className: "btn btn-success",
+          onClick: function onClick(e) {
+            return _this5.calculateAmount(item._id);
+          },
+          style: {
+            marginLeft: "10px"
+          }
+        }, "Calucate Amount"))));
+      }));
+    }
+  }]);
+
+  return viewCategories;
+}(_react.Component);
+
+var _default = viewCategories;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","axios":"node_modules/axios/index.js"}],"components/vehicleComponents/createVehicle.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -43890,6 +43950,118 @@ var viewVehicles = /*#__PURE__*/function (_Component) {
 
 var _default = viewVehicles;
 exports.default = _default;
+},{"react":"node_modules/react/index.js","axios":"node_modules/axios/index.js"}],"components/categoryComponents/vehiclesInCategory.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _axios = _interopRequireDefault(require("axios"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+var vehiclesInCategory = /*#__PURE__*/function (_Component) {
+  _inherits(vehiclesInCategory, _Component);
+
+  var _super = _createSuper(vehiclesInCategory);
+
+  function vehiclesInCategory(props) {
+    var _this;
+
+    _classCallCheck(this, vehiclesInCategory);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      categoryId: _this.props.match.params.id,
+      categoryName: '',
+      vehicles: []
+    };
+    return _this;
+  }
+
+  _createClass(vehiclesInCategory, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      console.log(this.state.categoryId);
+
+      _axios.default.get("http://localhost:3001/api/category/getVehicles/".concat(this.state.categoryId)).then(function (response) {
+        _this2.setState({
+          vehicles: response.data.vehicles
+        });
+
+        console.log(response.data.vehicles);
+      }).catch(function (error) {
+        console.error(error);
+      });
+
+      _axios.default.get("http://localhost:3001/api/category/".concat(this.state.categoryId)).then(function (response) {
+        _this2.setState({
+          categoryName: response.data.data.type
+        });
+
+        console.log(response.data.data.type);
+      }).catch(function (error) {
+        console.error(error);
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/_react.default.createElement("div", {
+        className: "container"
+      }, /*#__PURE__*/_react.default.createElement("h3", null, "Vehicles In ", this.state.categoryName), this.state.vehicles.length > 0 && this.state.vehicles.map(function (item, index) {
+        return /*#__PURE__*/_react.default.createElement("div", {
+          key: index,
+          className: "card mb-3",
+          style: {
+            width: "50%"
+          }
+        }, /*#__PURE__*/_react.default.createElement("div", {
+          className: "card body"
+        }, /*#__PURE__*/_react.default.createElement("div", {
+          className: "p-2"
+        }, /*#__PURE__*/_react.default.createElement("p", null, "Vehicle Code: ", item.code), /*#__PURE__*/_react.default.createElement("p", null, "Vehicle Model: ", item.model), /*#__PURE__*/_react.default.createElement("p", null, "Vehicle Body Type: ", item.type), /*#__PURE__*/_react.default.createElement("p", null, "Vehicle Name: ", item.name))));
+      }));
+    }
+  }]);
+
+  return vehiclesInCategory;
+}(_react.Component);
+
+var _default = vehiclesInCategory;
+exports.default = _default;
 },{"react":"node_modules/react/index.js","axios":"node_modules/axios/index.js"}],"App.js":[function(require,module,exports) {
 "use strict";
 
@@ -43912,6 +44084,8 @@ var _createVehicle = _interopRequireDefault(require("./components/vehicleCompone
 
 var _viewVehicles = _interopRequireDefault(require("./components/vehicleComponents/viewVehicles"));
 
+var _vehiclesInCategory = _interopRequireDefault(require("./components/categoryComponents/vehiclesInCategory"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App() {
@@ -43931,12 +44105,15 @@ var App = function App() {
   }), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     path: "/createVehicle",
     component: _createVehicle.default
+  }), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+    path: "/getVehicles/:id",
+    component: _vehiclesInCategory.default
   }))));
 };
 
 var _default = App;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","./components/navBar/navBar":"components/navBar/navBar.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./components/categoryComponents/createCategory":"components/categoryComponents/createCategory.js","./components/categoryComponents/viewCategories":"components/categoryComponents/viewCategories.js","./components/vehicleComponents/createVehicle":"components/vehicleComponents/createVehicle.js","./components/vehicleComponents/viewVehicles":"components/vehicleComponents/viewVehicles.js"}],"index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./components/navBar/navBar":"components/navBar/navBar.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./components/categoryComponents/createCategory":"components/categoryComponents/createCategory.js","./components/categoryComponents/viewCategories":"components/categoryComponents/viewCategories.js","./components/vehicleComponents/createVehicle":"components/vehicleComponents/createVehicle.js","./components/vehicleComponents/viewVehicles":"components/vehicleComponents/viewVehicles.js","./components/categoryComponents/vehiclesInCategory":"components/categoryComponents/vehiclesInCategory.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -43976,7 +44153,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63157" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57767" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
