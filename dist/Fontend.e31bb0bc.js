@@ -29617,7 +29617,7 @@ var navBar = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("nav", {
-        className: "navbar navbar-expand-lg navbar-light bg-light"
+        className: "navbar navbar-expand-lg navbar navbar-dark bg-dark"
       }, /*#__PURE__*/_react.default.createElement("div", {
         className: "container-fluid"
       }, /*#__PURE__*/_react.default.createElement("a", {
@@ -44153,7 +44153,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50178" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51523" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
